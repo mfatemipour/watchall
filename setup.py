@@ -39,7 +39,7 @@ setup(
     packages=find_packages(),
     platforms=['Any'],
     include_package_data=True,
-    install_requires=['psutil', 'curses'],
+    install_requires=['psutil'],
     scripts=['watchall.py']
 )
 
