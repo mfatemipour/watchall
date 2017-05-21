@@ -10,7 +10,7 @@ but with scrolling feature
 __author__ = 'M. Fatemipour'
 __email__ = 'm.fatemipour@gmail.com'
 __date__ = '2017-May-10'
-__version__ = '1.0.0'
+__version__ = '2.0.0'
 
 PROJECT = 'watchall'
 
@@ -22,6 +22,8 @@ try:
 except IOError:
       long_description = 'watchall execute a program periodically, showing output fullscreen same as linux watch command' \
                         'but with scrolling feature'
+
+
 
 setup(
     name=PROJECT,
@@ -40,7 +42,7 @@ setup(
     platforms=['Any'],
     include_package_data=True,
     install_requires=['psutil'],
-    scripts=['watchall.py']
+    scripts=['watchall']
 )
 
 
