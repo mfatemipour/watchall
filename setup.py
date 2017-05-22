@@ -10,7 +10,7 @@ but with scrolling feature
 __author__ = 'M. Fatemipour'
 __email__ = 'm.fatemipour@gmail.com'
 __date__ = '2017-May-10'
-__version__ = '2.0.0'
+__version__ = '2.1.0'
 
 PROJECT = 'watchall'
 

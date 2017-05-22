@@ -41,20 +41,39 @@ class Watchall(object):
         try:
             while self.active is True:
                 c = self.stdscr.getch()
+                y, x = self.stdscr.getmaxyx()
+
                 if c == curses.KEY_UP:
                     self.first_showing_line =  max (0, self.first_showing_line - 1)
-                    self.refresh_screen(update_pad=False)
+
                 elif c == curses.KEY_DOWN:
                     self.first_showing_line = min(self.cursor_position[0], self.first_showing_line + 1)
-                    self.refresh_screen(update_pad=False)
+
+                elif c == curses.KEY_END:
+                    self.first_showing_line = max(self.cursor_position[0] - y+1, 0)
+
+                elif c == curses.KEY_HOME:
+                    self.first_showing_line = 0
+
+                elif c == curses.KEY_NPAGE:
+                    last_page = self.cursor_position[0] - y+1
+                    self.first_showing_line = min(self.first_showing_line + (y-1), last_page)
+
+                elif c == curses.KEY_PPAGE:
+                    self.first_showing_line = max(self.first_showing_line - (y - 1), 0)
+
                 elif c == curses.KEY_RESIZE:
-                    self.refresh_screen(update_pad=False)
+                    pass
+
                 elif c == self.ESC_KEY:
-                    self.active = False
-                    self.thread.join()
                     break
+
+                self.refresh_screen(update_pad=False)
         except:
             pass
+
+        self.active = False
+        self.thread.join()
 
 
     def update_lines(self):
@@ -103,10 +122,11 @@ class Watchall(object):
 
                 self.cursor_position = self.pad.getyx()
             try:
+                stdscr.clear()
                 stdscr.addstr(0, 0, "Every {}s: {}, first line: {}/{}".format(self.interval, self.cmd,
-                              self.first_showing_line, self.cursor_position[0]))
+                                                                              self.first_showing_line, self.cursor_position[0]))
                 stdscr.refresh()
-                self.pad.refresh(self.first_showing_line, 0, 1, 0, y-2, x)
+                self.pad.refresh(self.first_showing_line, 0, 1, 0, y-1, x)
 
             except Exception as e:
                 print e.message
