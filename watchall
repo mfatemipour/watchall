@@ -140,10 +140,10 @@ class Watchall(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-d', '--differences', action='store_true', help='highlight differences')
-    parser.add_argument('-n', '--interval', type=int, help='interval', required=False, default=2)
-    parser.add_argument('-m', '--max_line_scroll', type=int, help='max_line_scroll', required=False, default=200)
-    parser.add_argument('Command', metavar='Command', type=str, nargs=1, help='Command')
-    parser.add_argument('Args', metavar='Arguments', type=str, nargs='*', help='Command arguments')
+    parser.add_argument('-n', '--interval', type=int, help='interval', default=2)
+    parser.add_argument('-m', '--max_line_scroll', type=int, help='max_line_scroll', default=200)
+    parser.add_argument('Command', metavar='Command', nargs=1, help='Command')
+    parser.add_argument('Args', metavar='Arguments', nargs=argparse.REMAINDER, help='Command arguments')
 
     # --------------------------------- Global variables ------------------------
     args = parser.parse_args()
