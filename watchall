@@ -129,7 +129,7 @@ class Watchall(object):
                 self.pad.refresh(self.first_showing_line, 0, 1, 0, y-1, x)
 
             except Exception as e:
-                print e.message
+                print(e.message)
         finally:
             self.mutex.release()
 
